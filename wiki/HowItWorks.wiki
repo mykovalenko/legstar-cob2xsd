@@ -11,7 +11,7 @@ There are 3 ways you can use it:
 
  * [#Running_an_Apache_ANT_Task Running an Apache ANT Task]
 
- * [Calling_the_API_from_your_own_Java_code Calling the API from your own Java code] 
+ * [#Calling_the_API_from_your_own_Java_code Calling the API from your own Java code] 
 
 Here we describe these 3 implementations with an emphasis on the API.
 
@@ -38,7 +38,7 @@ The output is always a folder.
 
  The XML Schema name is build by appending ".xsd" to the COBOL file name.
 
-= Running an Apache ANT Task =
+=Running an Apache ANT Task=
 
 The distribution comes with a build.xml which shows how to invoke the ant task.
 
@@ -63,7 +63,7 @@ Here is an example where target namespace is set and LegStar annotations are req
 </target>
 }}}
 
-= Calling the API from your own Java code =
+=Calling the API from your own Java code=
 
 The distribution lib folder contains the jars that you might need to add to your classpath.
 
