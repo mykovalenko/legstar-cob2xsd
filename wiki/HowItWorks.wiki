@@ -5,21 +5,47 @@
 
 The legstar-cob2xsd utility is distributed as an API, an Apache ANT Task and a standalone executable jar.
 
+= Using the API =
+
 There are mainly 2 packages:
 
 || com.legstar.cobol || Contains the parsing logic ||
 || com.legstar.cob2xsd || Contains the XML Schema generation ||
 
-= Using the API =
-== Parser implementation ==
+This represents the separation of concern between parsing and generation. We should be able to reuse the parsing part to produce other formats (JSON Schema for instance).
+
+There are only 2 classes you should care about as an API user and both are in the com.legstar.cob2xsd package:
+
+|| [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cob2xsd/Cob2XsdContext.html Cob2XsdContext] || Set of XML Schema generation options ||
+|| [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cob2xsd/CobolStructureToXsd.html CobolStructureToXsd] || The main entry point ||
+
+This is a snippet of code that shows a typical use of these classes:
+{{{
+        try {
+            Cob2XsdContext context = new Cob2XsdContext();
+            context.setTargetNamespace("http://www.mycompany.com/test");
+            CobolStructureToXsd cob2xsd = new CobolStructureToXsd(context);
+            String xmlSchema = cob2xsd.translate("       01 A.\n           02 B PIC X.");
+            System.out.println(xmlSchema);
+        } catch (CobolStructureToXsdException e) {
+            e.printStackTrace();
+        }
+
+}}}
+
+
 
 == Parser implementation ==
 
-Parsing is achieved using the [http://www.antlr.org/ ANLR] lexer/parser. The ANTLR grammars are [http://code.google.com/p/legstar-cob2xsd/source/browse/#svn/trunk/src/main/antlr3/com/legstar/cobol here].
+== Parser implementation ==
+
+Parsing is achieved using the [http://www.antlr.org/ ANLR] lexer/parser. 
 
 This is a summary of the parsing process implementation in legstar-cob2xsd:
 
 http://legstar-cob2xsd.googlecode.com/svn/wiki/images/cobol-parsing.png
+
+The ANTLR grammars are [http://code.google.com/p/legstar-cob2xsd/source/browse/#svn/trunk/src/main/antlr3/com/legstar/cobol here].
 
 The COBOL model is a set of java classes in package [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cobol/model/package-summary.html com.legstar.cobol.model].
 
@@ -29,7 +55,7 @@ This is done in a single step:
 
 http://legstar-cob2xsd.googlecode.com/svn/wiki/images/xml-schema-generation.png.
 
-There is a set of helper classes:
+There are 3 helper classes:
 
 || [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cob2xsd/Cob2XsdContext.html Cob2XsdContext] || Set of XML Schema generation options ||
 || [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cob2xsd/XsdDataItem.html XsdDataItem] || Maps a COBOL data item from the model to the XML Schema counterpart ||
