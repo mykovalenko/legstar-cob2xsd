@@ -1,5 +1,5 @@
 #summary Differences with legstar-schemagen.
-#labels Phase-Requirements,Featured
+#labels Phase-Requirements
 
 = Overview =
 
@@ -48,6 +48,4 @@ The XML Schema produced will often look different from the one legstar-schemagen
  * For LegStar annotations, cobolName attribute is FILLER if the data item is a filler. legstar-schemagen used FILLER-srceLine instead.
 
  * The default COBOL compiler QUOTE option is now QUOTE (it is APOST for legstar-schemagen). You can revert this by setting option [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cob2xsd/Cob2XsdContext.html#setQuoteIsQuote(boolean) setQuoteIsQuote] to false.
-
-
 
