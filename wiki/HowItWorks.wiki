@@ -9,6 +9,7 @@ The legstar-cob2xsd utility is distributed as an API, an Apache ANT Task and a s
 
 There are mainly 2 packages:
 
+|| * Package name* || * description* ||
 || com.legstar.cobol || Contains the parsing logic ||
 || com.legstar.cob2xsd || Contains the XML Schema generation ||
 
@@ -16,8 +17,9 @@ This represents the separation of concern between parsing and generation. We sho
 
 There are only 2 classes you should care about as an API user and both are in the com.legstar.cob2xsd package:
 
+|| * Class name* || * description* ||
 || [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cob2xsd/Cob2XsdContext.html Cob2XsdContext] || Set of XML Schema generation options ||
-|| [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cob2xsd/CobolStructureToXsd.html CobolStructureToXsd] || The main entry point ||
+|| [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cob2xsd/CobolStructureToXsd.html CobolStructureToXsd] || Implements the main *translate* methods ||
 
 This is a snippet of code that shows a typical use of these classes:
 {{{
@@ -33,9 +35,7 @@ This is a snippet of code that shows a typical use of these classes:
 
 }}}
 
-
-
-== Parser implementation ==
+The rest of this documentation gives more detail about the implementation of CobolStructureToXsd.
 
 == Parser implementation ==
 
@@ -57,6 +57,7 @@ http://legstar-cob2xsd.googlecode.com/svn/wiki/images/xml-schema-generation.png.
 
 There are 3 helper classes:
 
+|| * Class name* || * description* ||
 || [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cob2xsd/Cob2XsdContext.html Cob2XsdContext] || Set of XML Schema generation options ||
 || [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cob2xsd/XsdDataItem.html XsdDataItem] || Maps a COBOL data item from the model to the XML Schema counterpart ||
 || [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cob2xsd/XsdAnnotationEmitter.html XsdAnnotationEmitter] || Used when LegStar annotations are to be added to the XML Schema ||
