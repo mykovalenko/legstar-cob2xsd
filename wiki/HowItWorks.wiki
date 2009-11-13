@@ -3,11 +3,50 @@
 
 = Overview =
 
-The legstar-cob2xsd utility is distributed as an API, an Apache ANT Task and a standalone executable jar.
+legstar-cob2xsd is written in Java.
 
-= Using the API =
+There are 3 ways you can use it:
 
-There are mainly 2 packages:
+ * Running a standalone executable jar
+
+ * Running an Apache ANT Task
+
+ * Calling the API from your own Java code 
+
+= Running a standalone executable jar =
+
+This is the easiest way to invoke the utility.
+
+The distribution comes with run.sh and run.bat files.
+
+By default, run picks up COBOL source code from the cobol folder and places the result in the schema folder.
+
+The -h option lists all parameters that you might want to set.
+
+The executable jar is called legstar-cob2xsd-x.y.z-exe.jar where x.y.z is the version number. It bundles all its dependencies so you can move it around as you please.
+
+You invoke such an executable the classical way (look inside run.sh for instance):
+{{{
+java -jar legstar-cob2xsd-x.y.z-exe.jar -i cobol -o schema
+}}}
+
+The input is a folder, in which case all files from that folder are processed, or a file name.
+
+The output is always a folder.
+
+The XML Schema name is build by appending ".xsd" to the COBOL file name.
+
+= Running an Apache ANT Task =
+
+The distribution comes with a build.xml which shows how 
+
+= Calling the API from your own Java code =
+
+The distribution lib folder contains the jars that you might need to add to your classpath.
+
+legstar-cob2xsd-x.y.z.jar is the major one.
+
+It contains 2 main packages:
 
 || * Package name* || * description* ||
 || com.legstar.cobol || Contains the parsing logic ||
@@ -35,7 +74,7 @@ This is a snippet of code that shows a typical use of these classes:
 
 }}}
 
-The rest of this documentation gives more detail about the implementation of CobolStructureToXsd.
+The rest of this documentation gives more detail about the implementation of CobolStructureToXsd in case you need to go deeper.
 
 == Parser implementation ==
 
