@@ -1,44 +1,67 @@
 #summary How it works.
 #labels Phase-Requirements,Featured
 
-= Overview =
+=Overview=
 
-    legstar-cob2xsd is written in Java.
-    
-    There are 3 ways you can use it:
-    
-     * Running a standalone executable jar
-    
-     * Running an Apache ANT Task
-    
-     * Calling the API from your own Java code 
+ legstar-cob2xsd is written in Java.
 
-= Running a standalone executable jar =
+ There are 3 ways you can use it:
 
-    This is the easiest way to invoke the utility.
-    
-    The distribution comes with run.sh and run.bat files.
-    
-    By default, run picks up COBOL source code from the cobol folder and places the result in the schema folder.
-    
-    The -h option lists all parameters that you might want to set.
-    
-    The executable jar is called legstar-cob2xsd-x.y.z-exe.jar where x.y.z is the version number. It bundles all its dependencies so you can move it around as you please.
-    
-    You invoke such an executable the classical way (look inside run.sh for instance):
-    {{{
-    java -jar legstar-cob2xsd-x.y.z-exe.jar -i cobol -o schema
-    }}}
-    
-    The input is a folder, in which case all files from that folder are processed, or a file name.
-    
-    The output is always a folder.
-    
-    The XML Schema name is build by appending ".xsd" to the COBOL file name.
+ * Running a standalone executable jar
+
+ * Running an Apache ANT Task
+
+ * Calling the API from your own Java code 
+
+ Here we describe these 3 implementations with an emphasis on the API.
+
+=Running a standalone executable jar=
+
+ This is the easiest way to invoke the utility.
+
+ The distribution comes with run.sh and run.bat files.
+
+ By default, run picks up COBOL source code from the cobol folder and places the result in the schema folder.
+
+ The -h option lists all parameters that you might want to set.
+
+ The executable jar is called legstar-cob2xsd-x.y.z-exe.jar where x.y.z is the version number. It bundles all its dependencies so you can move it around as you please.
+
+ You invoke such an executable the classical way (look inside run.sh for instance):
+ {{{
+ java -jar legstar-cob2xsd-x.y.z-exe.jar -i cobol -o schema
+ }}}
+
+ The input is a folder, in which case all files from that folder are processed, or a file name.
+
+ The output is always a folder.
+
+ The XML Schema name is build by appending ".xsd" to the COBOL file name.
 
 = Running an Apache ANT Task =
 
-The distribution comes with a build.xml which shows how 
+  The distribution comes with a build.xml which shows how to invoke the ant task.
+  
+  If you need to set additional parameters, all options from [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cob2xsd/Cob2XsdContext.html Cob2XsdContext] are available.
+  
+  The rule is that the ant property name does not need the initial "set" prefix and should start
+  with a lowercase character. So for instance:
+  {{{
+  setTargetNamespace becomes targetNamespace
+  }}}
+  
+  Here is an example where target namespace is set and LegStar annotations are requested:
+  {{{
+    <target name="cob2xsd" depends="init">
+        <cob2xsd targetDir="${xsd.dir}"
+             targetNamespace="http://www.mycompany.com/test"
+             addLegStarAnnotations="true">
+            <fileset dir="${cobol.dir}">
+                <include name="*.c*"/>
+            </fileset>
+        </cob2xsd>
+    </target>
+  }}}
 
 = Calling the API from your own Java code =
 
