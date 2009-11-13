@@ -7,7 +7,7 @@ legstar-cob2xsd is written in Java.
 
 There are 3 ways you can use it:
 
- * [Running a standalone executable jar]
+ * [Running a standalone executable jar#Running_a_standalone_executable_jar]
 
  * Running an Apache ANT Task
 
