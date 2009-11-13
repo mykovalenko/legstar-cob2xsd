@@ -9,9 +9,9 @@ There are 3 ways you can use it:
 
  * [#Running_a_standalone_executable_jar Running a standalone executable jar]
 
- * Running an Apache ANT Task
+ * [#Running_an_Apache_ANT_Task Running an Apache ANT Task]
 
- * Calling the API from your own Java code 
+ * [Calling_the_API_from_your_own_Java_code Calling the API from your own Java code] 
 
 Here we describe these 3 implementations with an emphasis on the API.
 
