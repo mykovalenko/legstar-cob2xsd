@@ -1,5 +1,5 @@
 #summary COBOL structure XML Schema generation.
-#labels Phase-Requirements,Featured
+#labels Phase-Requirements
 
 =XML Schema generation implementation=
 
