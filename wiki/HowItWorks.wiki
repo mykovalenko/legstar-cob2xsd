@@ -67,9 +67,7 @@ Here is an example where target namespace is set and LegStar annotations are req
 
 The distribution lib folder contains the jars that you might need to add to your classpath.
 
-legstar-cob2xsd-x.y.z.jar is the major one.
-
-It contains 2 main packages:
+legstar-cob2xsd-x.y.z.jar is the major one. It contains 2 main packages:
 
 || * Package name* || * description* ||
 || com.legstar.cobol || Contains the recognizer logic ||
@@ -98,3 +96,7 @@ This is a snippet of code that shows a typical use of these classes:
         }
 
 }}}
+
+=More info=
+
+Apart from the [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/index.html javadoc], you can find many use cases in the [http://code.google.com/p/legstar-cob2xsd/source/browse/#svn/trunk/src/test/java/com/legstar/cob2xsd JUnit tests] or join us on the [http://groups.google.com/group/legstar-user LegStar discussion group].
