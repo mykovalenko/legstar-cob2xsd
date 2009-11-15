@@ -1,5 +1,5 @@
 #summary COBOL structure recognizer.
-#labels Phase-Requirements,Featured
+#labels Phase-Requirements
 
 = COBOL structure Recognizer implementation=
 
