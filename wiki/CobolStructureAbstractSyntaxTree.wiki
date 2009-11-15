@@ -1,5 +1,5 @@
 #summary COBOL Structure Abstract Syntax Tree.
-#labels Phase-Requirements,Featured
+#labels Phase-Requirements
 
 = COBOL Structure Abstract Syntax Tree =
 
