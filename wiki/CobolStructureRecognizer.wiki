@@ -11,7 +11,7 @@ http://legstar-cob2xsd.googlecode.com/svn/wiki/images/cobol-parsing.png
 
 The only unusual step here is the CobolStructureKeywordsLexer which is an auxilliary lexer invoked by the main CobolStructureLexer to further recognize COBOL keywords. This significantly help reduce the complexity of the Lexer generated code.
 
-The ANTLR grammars are [http://code.google.com/p/legstar-cob2xsd/source/browse/#svn/trunk/src/main/antlr3/com/legstar/cobol here].
+The ANTLR grammars are [http://code.google.com/p/legstar-cob2xsd/source/browse/#svn/trunk/src/main/antlr3/com/legstar/cobol here]. The Abstract Syntax Tree produced by the parser is further described in CobolStructureAbstractSyntaxTree.
 
 The COBOL model is a set of java classes in package [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cobol/model/package-summary.html com.legstar.cobol.model].
 
