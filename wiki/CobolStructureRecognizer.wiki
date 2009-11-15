@@ -1,11 +1,11 @@
 #summary COBOL structure recognizer.
 #labels Phase-Requirements,Featured
 
-= COBOL structure Parser implementation=
+= COBOL structure Recognizer implementation=
 
 Parsing is achieved using the [http://www.antlr.org/ ANLR] lexer/parser. 
 
-This is a summary of the parsing process implementation in legstar-cob2xsd:
+This is a summary of the COBOL structure recognizer process implementation in legstar-cob2xsd:
 
 http://legstar-cob2xsd.googlecode.com/svn/wiki/images/cobol-parsing.png
 

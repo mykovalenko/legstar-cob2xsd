@@ -19,28 +19,28 @@ Here we describe these 3 implementations with an emphasis on the API.
 
 This is the easiest way to invoke the utility.
 
-The distribution comes with run.sh and run.bat files.
+The distribution comes with *run.sh* and *run.bat* files.
 
-By default, run picks up COBOL source code from the cobol folder and places the result in the schema folder.
+By default, run picks up COBOL source code from a folder called "cobol" and places the result in a folder called "schema".
 
 The -h option lists all parameters that you might want to set.
 
 The executable jar is called legstar-cob2xsd-x.y.z-exe.jar where x.y.z is the version number. It bundles all its dependencies so you can move it around as you please.
 
-You invoke such an executable the classical way (look inside run.sh for instance):
+You invoke such an executable the classical way (run.sh is an example of such a call):
 {{{
 java -jar legstar-cob2xsd-x.y.z-exe.jar -i cobol -o schema
 }}}
 
-The input is a folder, in which case all files from that folder are processed, or a file name.
+The input can be a folder, in which case all files from that folder are processed, or a file name.
 
 The output is always a folder.
 
- The XML Schema name is build by appending ".xsd" to the COBOL file name.
+The XML Schema name is build by appending ".xsd" to the COBOL file name.
 
 =Running an Apache ANT Task=
 
-The distribution comes with a build.xml which shows how to invoke the ant task.
+The distribution comes with a *build.xml* which shows how to invoke the ant task.
 
 If you need to set additional parameters, all options from [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cob2xsd/Cob2XsdContext.html Cob2XsdContext] are available.
 
@@ -72,10 +72,12 @@ legstar-cob2xsd-x.y.z.jar is the major one.
 It contains 2 main packages:
 
 || * Package name* || * description* ||
-|| com.legstar.cobol || Contains the parsing logic ||
+|| com.legstar.cobol || Contains the recognizer logic ||
 || com.legstar.cob2xsd || Contains the XML Schema generation ||
 
-This represents the separation of concern between parsing and generation. We should be able to reuse the parsing part to produce other formats (JSON Schema for instance).
+This represents the separation of concern between recognizing and generation. We should be able to reuse the recognizing part to produce other formats (JSON Schema for instance).
+
+There is more detail on the recognizer implementation in CobolStructureRecognizer and on the XML Schema generation in CobolStructureXsdGeneration.
 
 There are only 2 classes you should care about as an API user and both are in the com.legstar.cob2xsd package:
 
@@ -96,30 +98,3 @@ This is a snippet of code that shows a typical use of these classes:
         }
 
 }}}
-
-The rest of this documentation gives more detail about the implementation of CobolStructureToXsd in case you need to go deeper.
-
-== Parser implementation ==
-
-Parsing is achieved using the [http://www.antlr.org/ ANLR] lexer/parser. 
-
-This is a summary of the parsing process implementation in legstar-cob2xsd:
-
-http://legstar-cob2xsd.googlecode.com/svn/wiki/images/cobol-parsing.png
-
-The ANTLR grammars are [http://code.google.com/p/legstar-cob2xsd/source/browse/#svn/trunk/src/main/antlr3/com/legstar/cobol here].
-
-The COBOL model is a set of java classes in package [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cobol/model/package-summary.html com.legstar.cobol.model].
-
-== XML Schema generation implementation ==
-
-This is done in a single step:
-
-http://legstar-cob2xsd.googlecode.com/svn/wiki/images/xml-schema-generation.png.
-
-There are 3 helper classes:
-
-|| * Class name* || * description* ||
-|| [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cob2xsd/Cob2XsdContext.html Cob2XsdContext] || Set of XML Schema generation options ||
-|| [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cob2xsd/XsdDataItem.html XsdDataItem] || Maps a COBOL data item from the model to the XML Schema counterpart ||
-|| [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cob2xsd/XsdAnnotationEmitter.html XsdAnnotationEmitter] || Used when LegStar annotations are to be added to the XML Schema ||
