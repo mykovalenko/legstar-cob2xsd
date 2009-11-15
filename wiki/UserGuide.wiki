@@ -1,9 +1,11 @@
-#summary How it works.
+#summary How it use.
 #labels Phase-Requirements,Featured
 
 =Overview=
 
-legstar-cob2xsd is written in Java.
+legstar-cob2xsd is a standalone COBOL Structure to XML Schema translator written in Java.
+
+It is open source and available for [http://code.google.com/p/legstar-cob2xsd/downloads/list download] as a zip archive.
 
 There are 3 ways you can use it:
 
