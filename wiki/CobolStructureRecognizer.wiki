@@ -1,0 +1,20 @@
+#summary COBOL structure recognizer.
+#labels Phase-Requirements,Featured
+
+= COBOL structure Parser implementation=
+
+Parsing is achieved using the [http://www.antlr.org/ ANLR] lexer/parser. 
+
+This is a summary of the parsing process implementation in legstar-cob2xsd:
+
+http://legstar-cob2xsd.googlecode.com/svn/wiki/images/cobol-parsing.png
+
+The only unusual step here is the CobolStructureKeywordsLexer which is an auxilliary lexer invoked by the main CobolStructureLexer to further recognize COBOL keywords. This significantly help reduce the complexity of the Lexer generated code.
+
+The ANTLR grammars are [http://code.google.com/p/legstar-cob2xsd/source/browse/#svn/trunk/src/main/antlr3/com/legstar/cobol here].
+
+The COBOL model is a set of java classes in package [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cobol/model/package-summary.html com.legstar.cobol.model].
+
+The ANTLR generated classes are used as abstract classes by legstar-cosb2xsd. The actual implementations (with Impl suffixes) are very leightweight, they just add Apache commons logging and error formatting. The idea that grammars should be self containing and testable using [http://www.antlr.org/works/index.html AntlrWorks].
+
+The generation of the ANTLR code is automated thanks to the [http://antlr.org/antlr3-maven-plugin/index.html antlr3-maven-plugin].
