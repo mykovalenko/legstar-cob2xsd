@@ -1,4 +1,4 @@
-#summary How it use.
+#summary How to use it.
 #labels Phase-Requirements,Featured
 
 =Overview=
