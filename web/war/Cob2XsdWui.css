@@ -1,0 +1,100 @@
+h1 {
+    font-size: 2em;
+    font-weight: bold;
+    color: #777777;
+    margin: 0px 0px 35px;
+    text-align: center;
+    width: 800px;
+}
+
+.mainPanel {
+    margin: 0px 5px 0px;
+    width: 800px;
+}
+
+.buttonsPanel {
+    margin: 0px 5px 20px;
+    width: 100%;
+    background-image: url(arrowright.gif);
+    background-repeat: no-repeat;
+}
+
+.instructions {
+    margin: 0px 30px 0px;
+}
+
+.gwt-Button-options {
+    float: right
+    position: relative;
+}
+
+.cobolRuler {
+    margin: 0px 2px 0px;
+    font-family: courier;
+    font-size: small;
+}
+
+.inputCobol {
+    width: 750px;
+    height: 450px;
+    font-family: courier;
+    font-size: small;
+    background-image: url(bg.gif);
+    background-repeat: repeat;
+}
+
+.outputXsd {
+    width: 750px;
+    height: 450px;
+}
+
+.outputErrors {
+    width: 750px;
+    height: 450px
+}
+
+.dialogGrid {
+    margin: 5px;
+    width: 525px;
+    position: center;
+    padding: 5px;
+}
+
+.xsdEncoding {
+    margin: 0px 3px 0px;
+    width: 50px;
+}
+
+.targetNamespace {
+    margin: 0px 3px 0px;
+    width: 250px;
+}
+
+.jaxbPackageName {
+    margin: 0px 3px 0px;
+    width: 250px;
+}
+
+.jaxbTypeClassesSuffix {
+    margin: 0px 3px 0px;
+    width: 50px;
+}
+
+.currencySymbol {
+    margin: 0px 3px 0px;
+    width: 50px;
+}
+
+.closeButtonPanel {
+    float: right;
+}
+
+.copyright {
+    width: 750px;
+    margin: 0px 10px 0px;
+    font-size: x-small;
+}
+
+a img {
+    border: none;
+}
