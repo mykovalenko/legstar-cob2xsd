@@ -12,7 +12,7 @@
         <dependency>
             <groupId>com.legsem.legstar</groupId>
             <artifactId>legstar-cob2xsd</artifactId>
-            <version>0.0.6</version>
+            <version>0.0.7</version>
         </dependency> 
 
         <!-- Google APP Engine -->

@@ -266,7 +266,6 @@ public class Cob2XsdWui implements EntryPoint {
 		// Set up the callback object.
 		AsyncCallback < Cob2XsdServiceReply > callback = new AsyncCallback < Cob2XsdServiceReply >() {
 
-			@Override
 			public void onFailure(Throwable caught) {
 				if (caught instanceof Cob2XsdException) {
 					StringBuilder sb = new StringBuilder();
@@ -281,7 +280,6 @@ public class Cob2XsdWui implements EntryPoint {
 				
 			}
 
-			@Override
 			public void onSuccess(Cob2XsdServiceReply result) {
 				outputXsd.setText(result.getXsdSchema());
 				StringBuilder sb = new StringBuilder();

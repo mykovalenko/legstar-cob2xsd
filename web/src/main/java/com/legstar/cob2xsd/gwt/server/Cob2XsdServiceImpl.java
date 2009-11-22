@@ -38,7 +38,6 @@ public class Cob2XsdServiceImpl extends RemoteServiceServlet implements
 
 	private static final Log LOG = LogFactory.getLog(Cob2xsdWebServlet.class.getName());
 
-	@Override
 	public Cob2XsdServiceReply cob2xsdServer(
 			final String cobolSource,
 			final Cob2XsdContextClone context) throws Cob2XsdException {
