@@ -59,7 +59,7 @@ Here is an example where target namespace is set and LegStar annotations are req
          targetNamespace="http://www.mycompany.com/test"
          addLegStarAnnotations="true">
         <fileset dir="${cobol.dir}">
-            <include name="*.c*"/>
+            <include name="*"/>
         </fileset>
     </cob2xsd>
 </target>
