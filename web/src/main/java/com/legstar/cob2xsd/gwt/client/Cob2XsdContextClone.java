@@ -20,8 +20,11 @@ public class Cob2XsdContextClone implements Serializable {
     /** Default JAXB package name. */
     public static final String DEFAULT_JAXB_PACKAGE_NAME = "com.acme.test";
 
-    /** Default Currency symbol used (CURRENCY SIGN clause in the SPECIAL-NAMES). */
-    public static final String DEFAULT_CURRENCY_SYMBOL = "$";
+    /** Default Currency sign used (CURRENCY SIGN clause in the SPECIAL-NAMES). */
+    public static final String DEFAULT_CURRENCY_SIGN = "$";
+
+    /** Default Currency symbol used (CURRENCY PICTURE SYMBOL clause in the SPECIAL-NAMES). */
+    public static final String DEFAULT_CURRENCY_SYMBOL = DEFAULT_CURRENCY_SIGN;
 
 
     /* -------------------------------------------------------------------
@@ -68,7 +71,10 @@ public class Cob2XsdContextClone implements Serializable {
      * COBOL compiler related options
      * */
 
-    /** Currency symbol used (CURRENCY SIGN clause in the SPECIAL-NAMES). */
+    /** Currency sign used (CURRENCY SIGN clause in the SPECIAL-NAMES). */
+    private String _currencySign = DEFAULT_CURRENCY_SIGN;
+
+    /** Currency symbol used (CURRENCY PICTURE SYMBOL clause in the SPECIAL-NAMES). */
     private String _currencySymbol = DEFAULT_CURRENCY_SYMBOL;
 
     /** Whether comma is the decimal point (DECIMAL-POINT IS COMMA clause in the SPECIAL-NAMES). */
@@ -237,7 +243,25 @@ public class Cob2XsdContextClone implements Serializable {
      * */
 
     /**
-     * The COBOL currency symbol used (CURRENCY SIGN clause in the SPECIAL-NAMES).
+     * The COBOL currency sign used (CURRENCY SIGN clause in the SPECIAL-NAMES).
+     * @return the COBOL currency sign used
+     */
+    public String getCurrencySign() {
+        return _currencySign;
+    }
+
+    /**
+     * @param currencySign the COBOL currency sign used (CURRENCY SIGN clause in the SPECIAL-NAMES)
+     */
+    public void setCurrencySign(final String currencySign) {
+        if (currencySign == null || currencySign.length() == 0) {
+            throw new IllegalArgumentException("Currency sign cannot be null or empty");
+        }
+        _currencySign = currencySign;
+    }
+
+    /**
+     * The COBOL currency symbol used (CURRENCY PICTURE SYMBOL clause in the SPECIAL-NAMES).
      * @return the COBOL currency symbol used
      */
     public String getCurrencySymbol() {
@@ -245,9 +269,12 @@ public class Cob2XsdContextClone implements Serializable {
     }
 
     /**
-     * @param currencySymbol the COBOL currency symbol used (CURRENCY SIGN clause in the SPECIAL-NAMES)
+     * @param currencySymbol the COBOL currency symbol used (CURRENCY PICTURE SYMBOL clause in the SPECIAL-NAMES)
      */
     public void setCurrencySymbol(final String currencySymbol) {
+        if (currencySymbol == null || currencySymbol.length() == 0) {
+            throw new IllegalArgumentException("Currency symbol cannot be null or empty");
+        }
         _currencySymbol = currencySymbol;
     }
 
@@ -300,22 +327,22 @@ public class Cob2XsdContextClone implements Serializable {
     /** {@inheritDoc}*/
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Options in effect:\n");
-        sb.append("xsdEncoding                    : " + getXsdEncoding() + "\n");
-        sb.append("targetNamespace                : " + getTargetNamespace() + "\n");
-        sb.append("mapConditionsToFacets          : " + mapConditionsToFacets() + "\n");
-        sb.append("nameConflictPrependParentName  : " + nameConflictPrependParentName() + "\n");
-        sb.append("elementNamesStartWithUppercase : " + elementNamesStartWithUppercase() + "\n");
-        sb.append("customXslt                     : " + getCustomXsltFileName() + "\n");
-        sb.append("\n");
-        sb.append("addLegStarAnnotations          : " + addLegStarAnnotations() + "\n");
-        sb.append("jaxbPackageName                : " + getJaxbPackageName() + "\n");
-        sb.append("jaxbTypeClassesSuffix          : " + getJaxbTypeClassesSuffix() + "\n");
-        sb.append("\n");
-        sb.append("currencySymbol                 : " + getCurrencySymbol() + "\n");
-        sb.append("decimalPointIsComma            : " + decimalPointIsComma() + "\n");
-        sb.append("nSymbolDbcs                    : " + nSymbolDbcs() + "\n");
-        sb.append("quoteIsQuote                   : " + quoteIsQuote() + "\n");
+        sb.append("{");
+        sb.append("xsdEncoding: " + getXsdEncoding() + ", ");
+        sb.append("targetNamespace: " + getTargetNamespace() + ", ");
+        sb.append("mapConditionsToFacets: " + mapConditionsToFacets() + ", ");
+        sb.append("nameConflictPrependParentName: " + nameConflictPrependParentName() + ", ");
+        sb.append("elementNamesStartWithUppercase: " + elementNamesStartWithUppercase() + ", ");
+        sb.append("customXslt: " + getCustomXsltFileName() + ", ");
+        sb.append("addLegStarAnnotations: " + addLegStarAnnotations() + ", ");
+        sb.append("jaxbPackageName: " + getJaxbPackageName() + ", ");
+        sb.append("jaxbTypeClassesSuffix: " + getJaxbTypeClassesSuffix() + ", ");
+        sb.append("currencySign: " + getCurrencySign() + ", ");
+        sb.append("currencySymbol: " + getCurrencySymbol() + ", ");
+        sb.append("decimalPointIsComma: " + decimalPointIsComma() + ", ");
+        sb.append("nSymbolDbcs: " + nSymbolDbcs() + ", ");
+        sb.append("quoteIsQuote: " + quoteIsQuote() + ", ");
+        sb.append("}");
         return sb.toString();
     }
 

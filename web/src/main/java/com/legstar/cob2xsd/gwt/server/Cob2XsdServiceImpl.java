@@ -77,6 +77,7 @@ public class Cob2XsdServiceImpl extends RemoteServiceServlet implements
 		context.setAddLegStarAnnotations(contextClone.addLegStarAnnotations());
 		context.setJaxbPackageName(contextClone.getJaxbPackageName());
 		context.setJaxbTypeClassesSuffix(contextClone.getJaxbTypeClassesSuffix());
+        context.setCurrencySign(contextClone.getCurrencySign());
 		context.setCurrencySymbol(contextClone.getCurrencySymbol());
 		context.setDecimalPointIsComma(contextClone.decimalPointIsComma());
 		context.setNSymbolDbcs(contextClone.nSymbolDbcs());

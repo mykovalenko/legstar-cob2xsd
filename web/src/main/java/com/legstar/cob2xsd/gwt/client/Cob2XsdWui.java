@@ -49,6 +49,7 @@ public class Cob2XsdWui implements EntryPoint {
 	private TextBox jaxbTypeClassesSuffix = new TextBox();
 	
 	private CheckBox decimalPointIsComma = new CheckBox();
+    private TextBox currencySign = new TextBox();
 	private TextBox currencySymbol = new TextBox();
 	private CheckBox nSymbolDbcs = new CheckBox();
 	private CheckBox quoteIsQuote = new CheckBox();
@@ -88,14 +89,18 @@ public class Cob2XsdWui implements EntryPoint {
 
 		/* Initialize options.*/
 		optionsButton.addStyleDependentName("options");
+
 		xsdEncoding.setText(Cob2XsdContextClone.DEFAULT_XSD_ENCODING);
 		targetNamespace.setText(Cob2XsdContextClone.DEFAULT_TARGET_NAMESPACE);
 		jaxbPackageName.setText(Cob2XsdContextClone.DEFAULT_JAXB_PACKAGE_NAME);
+        currencySign.setText(Cob2XsdContextClone.DEFAULT_CURRENCY_SIGN);
 		currencySymbol.setText(Cob2XsdContextClone.DEFAULT_CURRENCY_SYMBOL);
+
 		xsdEncoding.setStyleName("xsdEncoding");
 		targetNamespace.setStyleName("targetNamespace");
 		jaxbPackageName.setStyleName("jaxbPackageName");
 		jaxbTypeClassesSuffix.setStyleName("jaxbTypeClassesSuffix");
+		currencySign.setStyleName("currencySign");
 		currencySymbol.setStyleName("currencySymbol");
 
 
@@ -177,7 +182,7 @@ public class Cob2XsdWui implements EntryPoint {
 		dialogBox.setWidget(dialogContents);
 		
 		// Create a table to layout the content
-		Grid dialogGrid = new Grid(12, 2);
+		Grid dialogGrid = new Grid(13, 2);
 		dialogGrid.addStyleName("dialogGrid");
 		
         int row = 0;
@@ -220,8 +225,11 @@ public class Cob2XsdWui implements EntryPoint {
 		dialogGrid.setWidget(row, 0, new Label("Decimal point is comma"));
 		dialogGrid.setWidget(row, 1, decimalPointIsComma);
 		row++;
-		dialogGrid.setWidget(row, 0, new Label("Currency symbol"));
-		dialogGrid.setWidget(row, 1, currencySymbol);
+		dialogGrid.setWidget(row, 0, new Label("Currency sign"));
+		dialogGrid.setWidget(row, 1, currencySign);
+        row++;
+        dialogGrid.setWidget(row, 0, new Label("Currency symbol"));
+        dialogGrid.setWidget(row, 1, currencySymbol);
 		row++;
 		dialogGrid.setWidget(row, 0, new Label("National symbol dbcs"));
 		dialogGrid.setWidget(row, 1, nSymbolDbcs);
@@ -310,6 +318,7 @@ public class Cob2XsdWui implements EntryPoint {
 		context.setAddLegStarAnnotations(addLegStarAnnotations.getValue());
 		context.setJaxbPackageName(jaxbPackageName.getText());
 		context.setJaxbTypeClassesSuffix(jaxbTypeClassesSuffix.getText());
+        context.setCurrencySign(currencySign.getText());
 		context.setCurrencySymbol(currencySymbol.getText());
 		context.setDecimalPointIsComma(decimalPointIsComma.getValue());
 		context.setNSymbolDbcs(nSymbolDbcs.getValue());
