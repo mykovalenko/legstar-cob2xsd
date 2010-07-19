@@ -51,9 +51,9 @@ public class Cob2xsdWebServlet extends HttpServlet {
 				resp.setContentType("text/plain");
 				resp.getWriter().println(xmlSchema);
 			} catch (RecognizerException e) {
-				throw new IOException(e);
+				throw new IOException(e.getMessage());
 			} catch (XsdGenerationException e) {
-				throw new IOException(e);
+				throw new IOException(e.getMessage());
 			}
 	}
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)

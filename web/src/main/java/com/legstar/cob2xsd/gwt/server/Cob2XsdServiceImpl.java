@@ -52,6 +52,10 @@ public class Cob2XsdServiceImpl extends RemoteServiceServlet implements
 			final String cobolSource,
 			final Cob2XsdContextClone context) throws Cob2XsdException {
 		notifyByMail(cobolSource);
+		// Moving from GAE 1.26 to 1.3.5 the internal JDK xalan does not seem
+		// to be found (at least locally). Either uncomment next line or add explicit
+		// xalan.jar in dependencies
+		//System.setProperty("javax.xml.transform.TransformerFactory", "com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl");
 		LOG.info("Got a request");
 		
 		List < String > errorMessages = new ArrayList < String >();
