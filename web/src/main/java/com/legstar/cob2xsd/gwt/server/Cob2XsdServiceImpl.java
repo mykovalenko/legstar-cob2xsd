@@ -29,6 +29,7 @@ import com.legstar.antlr.RecognizerException;
 import com.legstar.cob2xsd.Cob2XsdContext;
 import com.legstar.cob2xsd.CobolStructureToXsd;
 import com.legstar.cob2xsd.XsdGenerationException;
+import com.legstar.cob2xsd.Cob2XsdContext.CodeFormat;
 import com.legstar.cob2xsd.gwt.client.Cob2XsdContextClone;
 import com.legstar.cob2xsd.gwt.client.Cob2XsdException;
 import com.legstar.cob2xsd.gwt.client.Cob2XsdService;
@@ -83,14 +84,15 @@ public class Cob2XsdServiceImpl extends RemoteServiceServlet implements
 	 */
 	public Cob2XsdContext cloneContext(final Cob2XsdContextClone contextClone) {
 		Cob2XsdContext context = new Cob2XsdContext();
+		context.setCodeFormat(CodeFormat.valueOf(contextClone.getCodeFormat().toString()));
+		context.setStartColumn(contextClone.getStartColumn());
+        context.setEndColumn(contextClone.getEndColumn());
 		context.setTargetNamespace(contextClone.getTargetNamespace());
 		context.setXsdEncoding(contextClone.getXsdEncoding());
 		context.setNameConflictPrependParentName(contextClone.nameConflictPrependParentName());
 		context.setMapConditionsToFacets(contextClone.mapConditionsToFacets());
 		context.setElementNamesStartWithUppercase(contextClone.elementNamesStartWithUppercase());
 		context.setAddLegStarAnnotations(contextClone.addLegStarAnnotations());
-		context.setJaxbPackageName(contextClone.getJaxbPackageName());
-		context.setJaxbTypeClassesSuffix(contextClone.getJaxbTypeClassesSuffix());
         context.setCurrencySign(contextClone.getCurrencySign());
 		context.setCurrencySymbol(contextClone.getCurrencySymbol());
 		context.setDecimalPointIsComma(contextClone.decimalPointIsComma());
