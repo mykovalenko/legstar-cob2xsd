@@ -10,13 +10,11 @@
  ******************************************************************************/
 package com.legstar.cob2xsd.gwt.server;
 
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
 import javax.mail.Message;
-import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -114,9 +112,7 @@ public class Cob2XsdServiceImpl extends RemoteServiceServlet implements
 			msg.setSubject("User " + user.getEmail() + " has tried cob2xsd on the cloud");
 			msg.setText(cobolSource);
 			Transport.send(msg);
-		} catch (UnsupportedEncodingException e) {
-			LOG.error("Notification failed", e);
-		} catch (MessagingException e) {
+		} catch (Exception e) {
 			LOG.error("Notification failed", e);
 		}
 		

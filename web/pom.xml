@@ -3,13 +3,13 @@
     <groupId>com.legsem.legstar</groupId>
     <artifactId>legstar-cob2xsd-web</artifactId>
     <packaging>war</packaging>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.3.0</version>
     <name>LegStar COBOL Structure to XML Schema WUI</name>
     <description>LegStar COBOL Structure to XML Schema WUI</description>
     <properties>
         <appEngineVersion>1.3.5</appEngineVersion>
         <gwtVersion>2.0.4</gwtVersion>
-        <cob2xsdVersion>0.2.0</cob2xsdVersion>
+        <cob2xsdVersion>0.3.0</cob2xsdVersion>
     </properties>
     <dependencies>
 
