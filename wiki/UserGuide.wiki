@@ -38,7 +38,7 @@ The input can be a folder, in which case all files from that folder are processe
 
 The output is always a folder.
 
-The XML Schema name is build by appending ".xsd" to the COBOL file name.
+The XML Schema name is built by appending ".xsd" to the COBOL file name.
 
 =Running an Apache ANT Task=
 
