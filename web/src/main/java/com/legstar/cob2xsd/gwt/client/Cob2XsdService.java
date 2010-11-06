@@ -21,5 +21,5 @@ public interface Cob2XsdService extends RemoteService {
 	
 	Cob2XsdServiceReply cob2xsdServer(
 			final String cobolSource,
-			final Cob2XsdContextClone context) throws Cob2XsdException;
+			final Cob2XsdModelClone context) throws Cob2XsdException;
 }

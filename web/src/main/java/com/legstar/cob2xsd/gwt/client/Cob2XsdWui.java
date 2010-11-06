@@ -52,7 +52,7 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.Widget;
-import com.legstar.cob2xsd.gwt.client.Cob2XsdContextClone.CodeFormat;
+import com.legstar.cob2xsd.gwt.client.Cob2XsdModelClone.CodeFormat;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -302,12 +302,12 @@ public class Cob2XsdWui implements EntryPoint {
 
         _startColumn = new NumberField();
         _startColumn.setFieldLabel("Start column");
-        _startColumn.setValue(Cob2XsdContextClone.DEFAULT_START_COLUMN);
+        _startColumn.setValue(Cob2XsdModelClone.DEFAULT_START_COLUMN);
         fieldSet.add(_startColumn, _formData);
 
         _endColumn = new NumberField();
         _endColumn.setFieldLabel("End column");
-        _endColumn.setValue(Cob2XsdContextClone.DEFAULT_END_COLUMN);
+        _endColumn.setValue(Cob2XsdModelClone.DEFAULT_END_COLUMN);
         fieldSet.add(_endColumn, _formData);
 
         return fieldSet;
@@ -330,7 +330,7 @@ public class Cob2XsdWui implements EntryPoint {
 
         _xsdEncoding = new TextField < String >();
         _xsdEncoding.setFieldLabel("XML Schema encoding");
-        _xsdEncoding.setValue(Cob2XsdContextClone.DEFAULT_XSD_ENCODING);
+        _xsdEncoding.setValue(Cob2XsdModelClone.DEFAULT_XSD_ENCODING);
         fieldSet.add(_xsdEncoding, _formData);
 
         _xsdNamespace = new TextField < String >();
@@ -395,13 +395,13 @@ public class Cob2XsdWui implements EntryPoint {
 
         _cobolCurrencySign = new TextField < String >();
         _cobolCurrencySign.setFieldLabel("Currency sign");
-        _cobolCurrencySign.setValue(Cob2XsdContextClone.DEFAULT_CURRENCY_SIGN);
+        _cobolCurrencySign.setValue(Cob2XsdModelClone.DEFAULT_CURRENCY_SIGN);
         fieldSet.add(_cobolCurrencySign, _formData);
 
         _cobolCurrencySymbol = new TextField < String >();
         _cobolCurrencySymbol.setFieldLabel("Currency symbol");
         _cobolCurrencySymbol
-                .setValue(Cob2XsdContextClone.DEFAULT_CURRENCY_SYMBOL);
+                .setValue(Cob2XsdModelClone.DEFAULT_CURRENCY_SYMBOL);
         fieldSet.add(_cobolCurrencySymbol, _formData);
 
         _nSymbolDbcsCheckBox = new CheckBox();
@@ -473,7 +473,7 @@ public class Cob2XsdWui implements EntryPoint {
         _inputFeedbackPanel.setSelection(_xsdTab);
         _outputErrors.setValue("");
 
-        Cob2XsdContextClone context = createCob2XsdContext();
+        Cob2XsdModelClone context = createCob2XsdContext();
         String cobolSource = _inputCobol.getValue();
 
         // Set up the callback object.
@@ -515,8 +515,8 @@ public class Cob2XsdWui implements EntryPoint {
      * 
      * @return a context using current options selected
      */
-    private Cob2XsdContextClone createCob2XsdContext() {
-        Cob2XsdContextClone context = new Cob2XsdContextClone();
+    private Cob2XsdModelClone createCob2XsdContext() {
+        Cob2XsdModelClone context = new Cob2XsdModelClone();
         context.setCodeFormat((_freeRadio.getValue()) ? CodeFormat.FREE_FORMAT
                 : CodeFormat.FIXED_FORMAT);
         context.setStartColumn(_startColumn.getValue().intValue());

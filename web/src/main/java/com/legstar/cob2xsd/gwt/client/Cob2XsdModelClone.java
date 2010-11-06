@@ -16,7 +16,7 @@ import java.io.Serializable;
  * This class gathers execution parameters for the COBOL to XML Schema utility.
  * 
  */
-public class Cob2XsdContextClone implements Serializable {
+public class Cob2XsdModelClone implements Serializable {
 
     /** serial ID. */
     private static final long serialVersionUID = 3689777932172778788L;

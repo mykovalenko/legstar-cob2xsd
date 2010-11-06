@@ -3,13 +3,14 @@
     <groupId>com.legsem.legstar</groupId>
     <artifactId>legstar-cob2xsd-web</artifactId>
     <packaging>war</packaging>
-    <version>0.3.0</version>
+    <version>0.3.2</version>
     <name>LegStar COBOL Structure to XML Schema WUI</name>
     <description>LegStar COBOL Structure to XML Schema WUI</description>
     <properties>
         <appEngineVersion>1.3.5</appEngineVersion>
         <gwtVersion>2.0.4</gwtVersion>
-        <cob2xsdVersion>0.3.0</cob2xsdVersion>
+        <cob2xsdVersion>0.3.2</cob2xsdVersion>
+        <legstarVersion>1.4.0</legstarVersion>
     </properties>
     <dependencies>
 
@@ -19,7 +20,34 @@
     		<version>${cob2xsdVersion}</version>
     		<type>jar</type>
     		<optional>false</optional>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.codehaus.jackson</groupId>
+                    <artifactId>jackson-core-lgpl</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.codehaus.jackson</groupId>
+                    <artifactId>jackson-mapper-lgpl</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.codehaus.jackson</groupId>
+                    <artifactId>jackson-xc</artifactId>
+                </exclusion>
+            </exclusions>
     	</dependency>
+        <!-- LegStar development & runtime API -->    
+        <dependency>
+            <groupId>com.legsem.legstar</groupId>
+            <artifactId>Legstar-coxbapi</artifactId>
+            <version>${legstarVersion}</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.legsem.legstar</groupId>
+            <artifactId>Legstar-codegen</artifactId>
+            <version>${legstarVersion}</version>
+            <optional>true</optional>
+        </dependency>
     	<dependency>
     		<groupId>com.google.appengine</groupId>
     		<artifactId>appengine-tools</artifactId>
@@ -105,6 +133,9 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
+                    <!--
+                        Populate the WEB-INF/lib folder with the dependencies 
+                     -->
                     <execution>
                         <id>copy-dependencies</id>
                         <phase>generate-resources</phase>
@@ -114,7 +145,7 @@
                         <configuration>
                             <outputDirectory>war/WEB-INF/lib</outputDirectory>
                             <overWriteSnapshots>true</overWriteSnapshots>
-                            <excludeGroupIds>javax.servlet,antlr,log4j</excludeGroupIds>
+                            <excludeGroupIds>javax.servlet,antlr,log4j,org.codehaus.jackson</excludeGroupIds>
                             <excludeArtifactIds>antlr,stringtemplate,appengine-tools,appengine-local-runtime-shared,gwt-dev</excludeArtifactIds>
                         </configuration>
                     </execution>
@@ -133,6 +164,28 @@
                     </dependency>
                 </dependencies> 
                 <executions>
+
+                    <!--
+                        Clean the WEB-INF/lib folder from previous dependencies 
+                     -->
+                    <execution> 
+                        <id>clean-lib-folder</id> 
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <delete>
+                                    <fileset dir="war/WEB-INF/lib" includes="**.*"/>
+                                </delete>
+                            </tasks>
+                        </configuration>
+                    </execution>
+
+                    <!--
+                        Check/Install app engine 
+                     -->
                     <execution> 
                         <id>install-appengine</id> 
                         <phase>validate</phase>
@@ -145,6 +198,10 @@
                             </tasks>
                         </configuration>
                     </execution>
+
+                    <!--
+                        Clean app engine folders
+                     -->
                     <execution> 
                         <id>clean-appengine-files</id> 
                         <phase>clean</phase>

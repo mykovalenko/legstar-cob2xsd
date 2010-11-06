@@ -27,8 +27,10 @@
 <%
     if (user == null) {
 %>
-    <h1>Welcome to LegStar on Google Application Engine</h1>
-    <p>You need to <a href="<%= userService.createLoginURL(request.getRequestURI()) %>">sign in</a> using your Google account to access this service.</p>
+    <center><img src="images/logo_en.png"/></center>
+    <h1>Welcome to <a href="http://code.google.com/p/legstar-cob2xsd/">LegStar</a> on Google Application Engine</h1>
+    <h1>***</h1>
+    <center>You need to <a href="<%= userService.createLoginURL(request.getRequestURI()) %>">SIGN IN</a> using your Google account to access this service.</center>
 <%
     } else {
 %>

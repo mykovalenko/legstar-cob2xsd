@@ -16,5 +16,5 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
  * The async counterpart of <code>Cob2XsdService</code>.
  */
 public interface Cob2XsdServiceAsync {
-	void cob2xsdServer(String cobolSource, Cob2XsdContextClone context, AsyncCallback < Cob2XsdServiceReply > callback);
+	void cob2xsdServer(String cobolSource, Cob2XsdModelClone context, AsyncCallback < Cob2XsdServiceReply > callback);
 }
