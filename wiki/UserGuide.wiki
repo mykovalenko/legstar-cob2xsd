@@ -9,7 +9,7 @@ It is open source and available for [http://code.google.com/p/legstar-cob2xsd/do
 
 There are 3 ways you can use it:
 
- * [#Running_a_standalone_executable_jar Running a standalone executable jar]
+ * [#Running_an_executable_jar Running an executable jar]
 
  * [#Running_an_Apache_ANT_Task Running an Apache ANT Task]
 
@@ -17,17 +17,19 @@ There are 3 ways you can use it:
 
 Here we describe these 3 implementations with an emphasis on the API.
 
-=Running a standalone executable jar=
+=Running an executable jar=
 
 This is the easiest way to invoke the utility.
 
-The distribution comes with *run.sh* and *run.bat* files.
+The distribution comes with *run.sh* and *run.bat* command files.
 
 By default, run picks up COBOL source code from a folder called "cobol" and places the result in a folder called "schema".
 
-The -h option lists all parameters that you might want to set.
+The -h option lists the parameters that you might want to set.
 
-The executable jar is called legstar-cob2xsd-x.y.z-exe.jar where x.y.z is the version number. It bundles all its dependencies so you can move it around as you please.
+There are additional configuration properties that you can set in conf/cob2xsd.properties.
+
+The executable jar is called legstar-cob2xsd-x.y.z-exe.jar where x.y.z is the version number. It depends on the lib and conf subfolders content.
 
 You invoke such an executable the classical way (run.sh is an example of such a call):
 {{{
@@ -36,7 +38,7 @@ java -jar legstar-cob2xsd-x.y.z-exe.jar -i cobol -o schema
 
 The input can be a folder, in which case all files from that folder are processed, or a file name.
 
-The output is always a folder.
+The output is usually a folder but can be a file if the input is a single file.
 
 The XML Schema name is built by appending ".xsd" to the COBOL file name.
 
@@ -44,7 +46,7 @@ The XML Schema name is built by appending ".xsd" to the COBOL file name.
 
 The distribution comes with a *build.xml* which shows how to invoke the ant task.
 
-If you need to set additional parameters, all options from [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cob2xsd/Cob2XsdContext.html Cob2XsdContext] are available.
+If you need to set additional parameters, all options from [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cob2xsd/Cob2XsdModel.html Cob2XsdModel] are available.
 
 The rule is that the ant property name does not need the initial "set" prefix and should start
 with a lowercase character. So for instance:
@@ -82,15 +84,15 @@ There is more detail on the recognizer implementation in CobolStructureRecognize
 There are only 2 classes you should care about as an API user and both are in the com.legstar.cob2xsd package:
 
 || * Class name* || * description* ||
-|| [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cob2xsd/Cob2XsdContext.html Cob2XsdContext] || Set of XML Schema generation options ||
+|| [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cob2xsd/Cob2XsdModel.html Cob2XsdModel] || Set of XML Schema generation options ||
 || [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cob2xsd/CobolStructureToXsd.html CobolStructureToXsd] || Implements the main *translate* methods ||
 
 This is a snippet of code that shows a typical use of these classes:
 {{{
         try {
-            Cob2XsdContext context = new Cob2XsdContext();
-            context.setTargetNamespace("http://www.mycompany.com/test");
-            CobolStructureToXsd cob2xsd = new CobolStructureToXsd(context);
+            Cob2XsdModel model = new Cob2XsdModel();
+            model.setTargetNamespace("http://www.mycompany.com/test");
+            CobolStructureToXsd cob2xsd = new CobolStructureToXsd(model);
             String xmlSchema = cob2xsd.translate("       01 A.\n           02 B PIC X.");
             System.out.println(xmlSchema);
         } catch (CobolStructureToXsdException e) {

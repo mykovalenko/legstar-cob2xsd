@@ -10,6 +10,6 @@ http://legstar-cob2xsd.googlecode.com/svn/wiki/images/xml-schema-generation.png.
 There are 3 helper classes:
 
 || * Class name* || * description* ||
-|| [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cob2xsd/Cob2XsdContext.html Cob2XsdContext] || Set of XML Schema generation options ||
+|| [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cob2xsd/Cob2XsdModel.html Cob2XsdModel] || Set of XML Schema generation options ||
 || [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cob2xsd/XsdDataItem.html XsdDataItem] || Maps a COBOL data item from the model to the XML Schema counterpart ||
 || [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cob2xsd/XsdAnnotationEmitter.html XsdAnnotationEmitter] || Used when LegStar annotations are to be added to the XML Schema ||
