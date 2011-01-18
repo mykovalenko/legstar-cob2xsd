@@ -7,19 +7,19 @@
     <name>LegStar COBOL Structure to XML Schema WUI</name>
     <description>LegStar COBOL Structure to XML Schema WUI</description>
     <properties>
-        <appEngineVersion>1.3.5</appEngineVersion>
-        <gwtVersion>2.0.4</gwtVersion>
+        <appEngineVersion>1.4.0</appEngineVersion>
+        <gwtVersion>2.1.1</gwtVersion>
         <cob2xsdVersion>0.3.2</cob2xsdVersion>
         <legstarVersion>1.4.0</legstarVersion>
     </properties>
     <dependencies>
 
-    	<dependency>
-    		<groupId>com.legsem.legstar</groupId>
-    		<artifactId>legstar-cob2xsd</artifactId>
-    		<version>${cob2xsdVersion}</version>
-    		<type>jar</type>
-    		<optional>false</optional>
+      <dependency>
+        <groupId>com.legsem.legstar</groupId>
+        <artifactId>legstar-cob2xsd</artifactId>
+        <version>${cob2xsdVersion}</version>
+        <type>jar</type>
+        <optional>false</optional>
             <exclusions>
                 <exclusion>
                     <groupId>org.codehaus.jackson</groupId>
@@ -34,82 +34,110 @@
                     <artifactId>jackson-xc</artifactId>
                 </exclusion>
             </exclusions>
-    	</dependency>
-        <!-- LegStar development & runtime API -->    
-        <dependency>
-            <groupId>com.legsem.legstar</groupId>
-            <artifactId>Legstar-coxbapi</artifactId>
-            <version>${legstarVersion}</version>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>com.legsem.legstar</groupId>
-            <artifactId>Legstar-codegen</artifactId>
-            <version>${legstarVersion}</version>
-            <optional>true</optional>
-        </dependency>
-    	<dependency>
-    		<groupId>com.google.appengine</groupId>
-    		<artifactId>appengine-tools</artifactId>
-    		<version>${appEngineVersion}</version>
-    		<type>jar</type>
-    		<scope>provided</scope>
-    		<optional>false</optional>
-    	</dependency>
-    	<dependency>
-    		<groupId>com.google.appengine</groupId>
-    		<artifactId>appengine-api</artifactId>
-    		<version>${appEngineVersion}</version>
-    		<type>jar</type>
-    		<scope>provided</scope>
-    		<optional>false</optional>
-    	</dependency>
-    	<dependency>
-    		<groupId>com.google.appengine</groupId>
-    		<artifactId>appengine-local-runtime-shared</artifactId>
-    		<version>${appEngineVersion}</version>
-    		<type>jar</type>
-    		<scope>provided</scope>
-    		<optional>false</optional>
-    	</dependency>
-    	<dependency>
-    		<groupId>com.google.gwt</groupId>
-    		<artifactId>gwt-user</artifactId>
-    		<version>${gwtVersion}</version>
-    		<type>jar</type>
-    		<scope>provided</scope>
-    		<optional>false</optional>
-    	</dependency>
-    	<dependency>
-    		<groupId>com.google.gwt</groupId>
-    		<artifactId>gwt-dev</artifactId>
-    		<version>${gwtVersion}</version>
-    		<type>jar</type>
-    		<scope>provided</scope>
-    		<optional>false</optional>
-    	</dependency>
-        <dependency>
-            <groupId>com.sencha</groupId>
-            <artifactId>gxt</artifactId>
-            <version>2.1.1</version>
-            <type>jar</type>
-        </dependency>
-    	<dependency>
-    		<groupId>javax.servlet</groupId>
-    		<artifactId>servlet-api</artifactId>
-    		<version>2.3</version>
-    		<type>jar</type>
-    		<scope>provided</scope>
-    		<optional>false</optional>
-    	</dependency>
-    	<dependency>
-    		<groupId>commons-logging</groupId>
-    		<artifactId>commons-logging</artifactId>
-    		<version>1.1</version>
-    		<type>jar</type>
-    		<optional>false</optional>
-    	</dependency>
+      </dependency>
+
+      <!-- LegStar development & runtime API -->    
+      <dependency>
+          <groupId>com.legsem.legstar</groupId>
+          <artifactId>Legstar-coxbapi</artifactId>
+          <version>${legstarVersion}</version>
+          <optional>true</optional>
+      </dependency>
+      <dependency>
+          <groupId>com.legsem.legstar</groupId>
+          <artifactId>Legstar-codegen</artifactId>
+          <version>${legstarVersion}</version>
+          <optional>true</optional>
+      </dependency>
+
+      <!-- Google AppEngine -->    
+      <dependency>
+          <groupId>com.google.appengine</groupId>
+          <artifactId>appengine-tools-sdk</artifactId>
+          <version>${appEngineVersion}</version>
+          <type>jar</type>
+          <scope>provided</scope>
+          <optional>false</optional>
+      </dependency>
+      <dependency>
+          <groupId>com.google.appengine</groupId>
+          <artifactId>appengine-api-1.0-sdk</artifactId>
+          <version>${appEngineVersion}</version>
+          <type>jar</type>
+          <scope>provided</scope>
+          <optional>false</optional>
+      </dependency>
+      <dependency>
+          <groupId>com.google.appengine</groupId>
+          <artifactId>appengine-api-labs</artifactId>
+          <version>${appEngineVersion}</version>
+          <type>jar</type>
+          <scope>provided</scope>
+          <optional>false</optional>
+      </dependency>
+      <dependency>
+          <groupId>com.google.appengine</groupId>
+          <artifactId>appengine-jsr107cache</artifactId>
+          <version>${appEngineVersion}</version>
+          <type>jar</type>
+          <scope>provided</scope>
+          <optional>false</optional>
+      </dependency>
+
+      <!-- Google Web Toolkit -->    
+      <dependency>
+          <groupId>com.google.gwt</groupId>
+          <artifactId>gwt-user</artifactId>
+          <version>${gwtVersion}</version>
+          <type>jar</type>
+          <scope>provided</scope>
+          <optional>false</optional>
+      </dependency>
+      <dependency>
+          <groupId>com.google.gwt</groupId>
+          <artifactId>gwt-dev</artifactId>
+          <version>${gwtVersion}</version>
+          <type>jar</type>
+          <scope>provided</scope>
+          <optional>false</optional>
+      </dependency>
+      <dependency>
+          <groupId>com.google.gwt</groupId>
+          <artifactId>gwt-servlet</artifactId>
+          <version>${gwtVersion}</version>
+          <type>jar</type>
+          <scope>provided</scope>
+          <optional>false</optional>
+      </dependency>
+
+      <!-- GXT -->    
+      <dependency>
+          <groupId>com.sencha</groupId>
+          <artifactId>gxt</artifactId>
+          <version>2.2.1</version>
+          <type>jar</type>
+      </dependency>
+
+      <!-- Servlet API     -->
+      <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>servlet-api</artifactId>
+        <version>2.3</version>
+        <type>jar</type>
+        <scope>provided</scope>
+        <optional>false</optional>
+      </dependency>
+
+      <!-- Apapche logging -->    
+      <dependency>
+          <groupId>commons-logging</groupId>
+          <artifactId>commons-logging</artifactId>
+          <version>1.1</version>
+          <type>jar</type>
+          <optional>false</optional>
+      </dependency>
     </dependencies>
+
     <build>
         <plugins>
 
@@ -185,7 +213,7 @@
 
                     <!--
                         Check/Install app engine 
-                     -->
+                    
                     <execution> 
                         <id>install-appengine</id> 
                         <phase>validate</phase>
@@ -198,10 +226,10 @@
                             </tasks>
                         </configuration>
                     </execution>
-
+ -->
                     <!--
                         Clean app engine folders
-                     -->
+                     
                     <execution> 
                         <id>clean-appengine-files</id> 
                         <phase>clean</phase>
@@ -214,10 +242,11 @@
                             </tasks>
                         </configuration>
                     </execution>
+-->
                 </executions>
             </plugin> 
 
         </plugins>
-	</build>
+  </build>
 
 </project>
