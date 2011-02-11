@@ -1,0 +1,84 @@
+## ==================================================================
+## Generates an ant script for Cobol to XML Schema translation
+##
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- =================================================================================
+     This script translates a COBOL Structure to an XML Schema.
+ -->
+<project basedir="${antModel.productLocation}" default="signalSuccess" name="translate-cobol-structure-to-xsd">
+
+    <!-- ===========================================================  -->
+    <!-- Setup environment
+    -->
+    <target name="init">
+    
+        <!-- Location of output XML Schemas  -->
+        <mkdir dir="${antModel.targetDir}"/>
+
+        <!-- COBOL Structure to XML Schema translator ant task  -->
+        <taskdef name="cob2xsd"
+            classname="com.legstar.cob2xsd.task.CobolStructureToXsdTask">
+            <classpath>
+                <fileset dir="${basedir}" includes="lib/*.jar"/>
+                <pathelement location="${basedir}/conf"/>
+            </classpath>
+        </taskdef>
+    
+    </target>
+
+    <!-- ===========================================================  -->
+    <!-- Generate XML Schemas
+    -->
+    <target name="generateXSD" depends="init">
+        <cob2xsd target="${antModel.targetXsdFile}"
+## -------------------------------------------------------------------
+## COBOL source format related options
+##
+            codeFormat="${antModel.getCodeFormat().toString()}"
+#if(${antModel.getCodeFormat().toString().equals("FIXED_FORMAT")})
+            startColumn="${antModel.startColumn}"
+            endColumn="${antModel.endColumn}"
+#end
+
+## -------------------------------------------------------------------
+## XML Schema related options
+##
+#if(${antModel.xsdEncoding})
+            xsdEncoding="${antModel.xsdEncoding}"
+#end
+#if(${antModel.targetNamespace})
+            targetNamespace="${antModel.targetNamespace}"
+#end
+            mapConditionsToFacets="${antModel.mapConditionsToFacets()}"
+#if(${antModel.customXsltFileName})
+            customXsltFileName="${antModel.customXsltFileName}"
+#end
+            nameConflictPrependParentName="${antModel.nameConflictPrependParentName()}"
+            elementNamesStartWithUppercase="${antModel.elementNamesStartWithUppercase()}"
+
+## -------------------------------------------------------------------
+## LegStar annotations related options
+##
+            addLegStarAnnotations="${antModel.addLegStarAnnotations()}"
+
+## -------------------------------------------------------------------
+## COBOL compiler related options
+##
+            currencySign="${antModel.currencySign}"
+            currencySymbol="${antModel.currencySymbol}"
+            nSymbolDbcs="${antModel.nSymbolDbcs()}"
+            decimalPointIsComma="${antModel.decimalPointIsComma()}"
+            quoteIsQuote="${antModel.quoteIsQuote()}"
+        >
+            <fileset file="${antModel.cobolSourceFilePath}"/>
+        </cob2xsd>
+    </target>
+  
+    <!-- ===========================================================  -->
+    <!-- Delete the probe file to signal success
+    -->
+    <target name="signalSuccess" depends="generateXSD">
+        <delete file="${antModel.probeFile}" quiet="true"/>
+    </target>
+    
+</project>
