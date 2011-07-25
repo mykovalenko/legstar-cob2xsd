@@ -85,14 +85,14 @@ There are only 2 classes you should care about as an API user and both are in th
 
 || * Class name* || * description* ||
 || [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cob2xsd/Cob2XsdModel.html Cob2XsdModel] || Set of XML Schema generation options ||
-|| [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cob2xsd/CobolStructureToXsd.html CobolStructureToXsd] || Implements the main *translate* methods ||
+|| [http://www.legsem.com/legstar/legstar-cob2xsd/apidocs/com/legstar/cob2xsd/Cob2Xsd.html Cob2Xsd] || Implements the main *translate* methods ||
 
 This is a snippet of code that shows a typical use of these classes:
 {{{
         try {
             Cob2XsdModel model = new Cob2XsdModel();
             model.setTargetNamespace("http://www.mycompany.com/test");
-            CobolStructureToXsd cob2xsd = new CobolStructureToXsd(model);
+            Cob2Xsd cob2xsd = new Cob2Xsd(model);
             String xmlSchema = cob2xsd.translate("       01 A.\n           02 B PIC X.");
             System.out.println(xmlSchema);
         } catch (CobolStructureToXsdException e) {
