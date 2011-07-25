@@ -28,8 +28,8 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.legstar.antlr.RecognizerException;
+import com.legstar.cob2xsd.Cob2Xsd;
 import com.legstar.cob2xsd.Cob2XsdModel;
-import com.legstar.cob2xsd.CobolStructureToXsd;
 import com.legstar.cob2xsd.XsdGenerationException;
 import com.legstar.cob2xsd.Cob2XsdModel.CodeFormat;
 import com.legstar.cob2xsd.gwt.client.Cob2XsdException;
@@ -65,7 +65,7 @@ public class Cob2XsdServiceImpl extends RemoteServiceServlet implements
         List < String > errorMessages = new ArrayList < String >();
         Cob2XsdServiceReply reply;
         try {
-            CobolStructureToXsd cob2xsd = new CobolStructureToXsd(
+            Cob2Xsd cob2xsd = new Cob2Xsd(
                     cloneModel(context));
             String xmlSchema = cob2xsd.translate(cobolSource);
             errorMessages = cob2xsd.getErrorHistory();

@@ -31,61 +31,59 @@ import com.google.appengine.api.users.User;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import com.legstar.antlr.RecognizerException;
+import com.legstar.cob2xsd.Cob2Xsd;
 import com.legstar.cob2xsd.Cob2XsdModel;
-import com.legstar.cob2xsd.CobolStructureToXsd;
 import com.legstar.cob2xsd.XsdGenerationException;
 
 @SuppressWarnings("serial")
 public class Cob2xsdWebServlet extends HttpServlet {
 
-    private static final Log LOG = LogFactory.getLog(Cob2xsdWebServlet.class
-            .getName());
+	private static final Log LOG = LogFactory.getLog(Cob2xsdWebServlet.class
+			.getName());
 
-    public void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws IOException {
-        try {
-            String cobolSource = req.getParameter("cobol");
-            notifyByMail(cobolSource);
-            LOG.info("Got a request");
+	public void doPost(HttpServletRequest req, HttpServletResponse resp)
+			throws IOException {
+		try {
+			String cobolSource = req.getParameter("cobol");
+			notifyByMail(cobolSource);
+			LOG.info("Got a request");
 
-            CobolStructureToXsd cob2xsd = new CobolStructureToXsd(
-                    new Cob2XsdModel());
-            String xmlSchema = cob2xsd.translate(cobolSource);
-            resp.setContentType("text/plain");
-            resp.getWriter().println(xmlSchema);
-        } catch (RecognizerException e) {
-            throw new IOException(e.getMessage());
-        } catch (XsdGenerationException e) {
-            throw new IOException(e.getMessage());
-        }
-    }
+			Cob2Xsd cob2xsd = new Cob2Xsd(new Cob2XsdModel());
+			String xmlSchema = cob2xsd.translate(cobolSource);
+			resp.setContentType("text/plain");
+			resp.getWriter().println(xmlSchema);
+		} catch (RecognizerException e) {
+			throw new IOException(e.getMessage());
+		} catch (XsdGenerationException e) {
+			throw new IOException(e.getMessage());
+		}
+	}
 
-    public void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws IOException {
-        resp.sendRedirect("/");
-    }
+	public void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws IOException {
+		resp.sendRedirect("/");
+	}
 
-    public void notifyByMail(final String cobolSource) {
-        try {
-            UserService userService = UserServiceFactory.getUserService();
-            User user = userService.getCurrentUser();
-            Properties props = new Properties();
-            Session session = Session.getDefaultInstance(props, null);
-            Message msg = new MimeMessage(session);
-            msg.setFrom(new InternetAddress("fady.moussallam@gmail.com",
-                    "legsem.com Admin"));
-            msg.addRecipient(Message.RecipientType.TO,
-                             new InternetAddress("admin@legsem.com",
-                                     "legsem.com Admin"));
-            msg.setSubject("User " + user.getEmail()
-                    + " has tried cob2xsd on the cloud");
-            msg.setText(cobolSource);
-            Transport.send(msg);
-        } catch (UnsupportedEncodingException e) {
-            LOG.error("Notification failed", e);
-        } catch (MessagingException e) {
-            LOG.error("Notification failed", e);
-        }
+	public void notifyByMail(final String cobolSource) {
+		try {
+			UserService userService = UserServiceFactory.getUserService();
+			User user = userService.getCurrentUser();
+			Properties props = new Properties();
+			Session session = Session.getDefaultInstance(props, null);
+			Message msg = new MimeMessage(session);
+			msg.setFrom(new InternetAddress("fady.moussallam@gmail.com",
+					"legsem.com Admin"));
+			msg.addRecipient(Message.RecipientType.TO, new InternetAddress(
+					"admin@legsem.com", "legsem.com Admin"));
+			msg.setSubject("User " + user.getEmail()
+					+ " has tried cob2xsd on the cloud");
+			msg.setText(cobolSource);
+			Transport.send(msg);
+		} catch (UnsupportedEncodingException e) {
+			LOG.error("Notification failed", e);
+		} catch (MessagingException e) {
+			LOG.error("Notification failed", e);
+		}
 
-    }
+	}
 }

@@ -7,10 +7,12 @@
     <name>LegStar COBOL Structure to XML Schema WUI</name>
     <description>LegStar COBOL Structure to XML Schema WUI</description>
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <appEngineVersion>1.4.0</appEngineVersion>
         <gwtVersion>2.1.1</gwtVersion>
-        <cob2xsdVersion>0.3.2</cob2xsdVersion>
-        <legstarVersion>1.4.0</legstarVersion>
+        <cob2xsdVersion>0.3.4</cob2xsdVersion>
+        <legstarCoreVersion>1.5.4</legstarCoreVersion>
     </properties>
     <dependencies>
 
@@ -19,38 +21,37 @@
         <artifactId>legstar-cob2xsd</artifactId>
         <version>${cob2xsdVersion}</version>
         <type>jar</type>
-        <optional>false</optional>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.codehaus.jackson</groupId>
-                    <artifactId>jackson-core-lgpl</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.codehaus.jackson</groupId>
-                    <artifactId>jackson-mapper-lgpl</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.codehaus.jackson</groupId>
-                    <artifactId>jackson-xc</artifactId>
-                </exclusion>
-            </exclusions>
+        <exclusions>
+            <exclusion>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-core-lgpl</artifactId>
+            </exclusion>
+            <exclusion>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-lgpl</artifactId>
+            </exclusion>
+            <exclusion>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-xc</artifactId>
+            </exclusion>
+        </exclusions>
       </dependency>
 
-      <!-- LegStar development & runtime API -->    
+      <!-- LegStar development & runtime API   
       <dependency>
           <groupId>com.legsem.legstar</groupId>
           <artifactId>Legstar-coxbapi</artifactId>
-          <version>${legstarVersion}</version>
+          <version>${legstarCoreVersion}</version>
           <optional>true</optional>
       </dependency>
       <dependency>
           <groupId>com.legsem.legstar</groupId>
           <artifactId>Legstar-codegen</artifactId>
-          <version>${legstarVersion}</version>
+          <version>${legstarCoreVersion}</version>
           <optional>true</optional>
       </dependency>
-
-      <!-- Google AppEngine -->    
+ --> 
+      <!-- Google AppEngine    
       <dependency>
           <groupId>com.google.appengine</groupId>
           <artifactId>appengine-tools-sdk</artifactId>
@@ -82,9 +83,9 @@
           <type>jar</type>
           <scope>provided</scope>
           <optional>false</optional>
-      </dependency>
+      </dependency> -->
 
-      <!-- Google Web Toolkit -->    
+      <!-- Google Web Toolkit   
       <dependency>
           <groupId>com.google.gwt</groupId>
           <artifactId>gwt-user</artifactId>
@@ -108,7 +109,7 @@
           <type>jar</type>
           <scope>provided</scope>
           <optional>false</optional>
-      </dependency>
+      </dependency> --> 
 
       <!-- GXT -->    
       <dependency>
@@ -146,6 +147,7 @@
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
+                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
 
@@ -173,7 +175,7 @@
                         <configuration>
                             <outputDirectory>war/WEB-INF/lib</outputDirectory>
                             <overWriteSnapshots>true</overWriteSnapshots>
-                            <excludeGroupIds>javax.servlet,antlr,log4j,org.codehaus.jackson</excludeGroupIds>
+                            <excludeGroupIds>javax.servlet,antlr,log4j,logkit,avalon-framework,oro,commons-collections,commons-lang,javax.activation,javax.xml.stream,commons-cli,org.codehaus.jackson,javax.xml.bind,com.sencha</excludeGroupIds>
                             <excludeArtifactIds>antlr,stringtemplate,appengine-tools,appengine-local-runtime-shared,gwt-dev</excludeArtifactIds>
                         </configuration>
                     </execution>
@@ -195,7 +197,7 @@
 
                     <!--
                         Clean the WEB-INF/lib folder from previous dependencies 
-                     -->
+                    
                     <execution> 
                         <id>clean-lib-folder</id> 
                         <phase>validate</phase>
@@ -209,7 +211,7 @@
                                 </delete>
                             </tasks>
                         </configuration>
-                    </execution>
+                    </execution> -->
 
                     <!--
                         Check/Install app engine 
