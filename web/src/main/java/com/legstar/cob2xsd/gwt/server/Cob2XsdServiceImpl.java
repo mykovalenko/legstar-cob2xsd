@@ -100,6 +100,8 @@ public class Cob2XsdServiceImpl extends RemoteServiceServlet implements
         model.setMapConditionsToFacets(modelClone.mapConditionsToFacets());
         model.setElementNamesStartWithUppercase(modelClone
                 .elementNamesStartWithUppercase());
+        model.setIgnoreOrphanPrimitiveElements(modelClone
+                .ignoreOrphanPrimitiveElements());
         model.setAddLegStarAnnotations(modelClone.addLegStarAnnotations());
         model.setCurrencySign(modelClone.getCurrencySign());
         model.setCurrencySymbol(modelClone.getCurrencySymbol());

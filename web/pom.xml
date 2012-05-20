@@ -6,14 +6,15 @@
     <version>0.3.2</version>
     <name>LegStar COBOL Structure to XML Schema WUI</name>
     <description>LegStar COBOL Structure to XML Schema WUI</description>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <appEngineVersion>1.4.0</appEngineVersion>
-        <gwtVersion>2.1.1</gwtVersion>
-        <cob2xsdVersion>0.3.4</cob2xsdVersion>
-        <legstarCoreVersion>1.5.4</legstarCoreVersion>
+        <appEngineVersion>1.6.5</appEngineVersion>
+        <gwtVersion>2.4.0</gwtVersion>
+        <cob2xsdVersion>0.3.5</cob2xsdVersion>
     </properties>
+
     <dependencies>
 
       <dependency>
@@ -37,21 +38,16 @@
         </exclusions>
       </dependency>
 
-      <!-- LegStar development & runtime API   
+      <!-- GXT -->    
       <dependency>
-          <groupId>com.legsem.legstar</groupId>
-          <artifactId>Legstar-coxbapi</artifactId>
-          <version>${legstarCoreVersion}</version>
-          <optional>true</optional>
+          <groupId>com.sencha</groupId>
+          <artifactId>gxt</artifactId>
+          <version>2.2.1</version>
+          <type>jar</type>
       </dependency>
-      <dependency>
-          <groupId>com.legsem.legstar</groupId>
-          <artifactId>Legstar-codegen</artifactId>
-          <version>${legstarCoreVersion}</version>
-          <optional>true</optional>
-      </dependency>
- --> 
-      <!-- Google AppEngine    
+
+     <!-- GAE and GWT only needed when populating WEB-INF/lib after a dependency upgrade-->
+     <!-- Google AppEngine
       <dependency>
           <groupId>com.google.appengine</groupId>
           <artifactId>appengine-tools-sdk</artifactId>
@@ -83,9 +79,10 @@
           <type>jar</type>
           <scope>provided</scope>
           <optional>false</optional>
-      </dependency> -->
-
-      <!-- Google Web Toolkit   
+      </dependency>  -->
+      
+      
+      <!-- Google Web Toolkit
       <dependency>
           <groupId>com.google.gwt</groupId>
           <artifactId>gwt-user</artifactId>
@@ -109,16 +106,8 @@
           <type>jar</type>
           <scope>provided</scope>
           <optional>false</optional>
-      </dependency> --> 
-
-      <!-- GXT -->    
-      <dependency>
-          <groupId>com.sencha</groupId>
-          <artifactId>gxt</artifactId>
-          <version>2.2.1</version>
-          <type>jar</type>
-      </dependency>
-
+      </dependency> -->
+      
       <!-- Servlet API     -->
       <dependency>
         <groupId>javax.servlet</groupId>
@@ -129,7 +118,7 @@
         <optional>false</optional>
       </dependency>
 
-      <!-- Apapche logging -->    
+      <!-- Apache logging -->    
       <dependency>
           <groupId>commons-logging</groupId>
           <artifactId>commons-logging</artifactId>
@@ -197,7 +186,7 @@
 
                     <!--
                         Clean the WEB-INF/lib folder from previous dependencies 
-                    
+                     -->
                     <execution> 
                         <id>clean-lib-folder</id> 
                         <phase>validate</phase>
@@ -207,11 +196,11 @@
                         <configuration>
                             <tasks>
                                 <delete>
-                                    <fileset dir="war/WEB-INF/lib" includes="**.*"/>
+                                    <fileset dir="war/WEB-INF/lib" includes="**.jar"/>
                                 </delete>
                             </tasks>
                         </configuration>
-                    </execution> -->
+                    </execution>
 
                     <!--
                         Check/Install app engine 

@@ -96,6 +96,11 @@ public class Cob2XsdModelClone implements Serializable {
     /** An optional XSLT transform for XML schema customization. */
     private String _customXsltFileName;
 
+    /**
+     * Ignore primitive data items which are not attached to a parent group.
+     */
+    private boolean _ignoreOrphanPrimitiveElements = true;
+
     /*
      * -------------------------------------------------------------------
      * LegStar annotations related options
@@ -293,6 +298,26 @@ public class Cob2XsdModelClone implements Serializable {
         _elementNamesStartWithUppercase = elementNamesStartWithUppercase;
     }
 
+    /**
+     * Ignore primitive data items which are not attached to a parent group.
+     * 
+     * @return true if primitive data items without a parent group are ignored
+     */
+    public boolean ignoreOrphanPrimitiveElements() {
+        return _ignoreOrphanPrimitiveElements;
+    }
+
+    /**
+     * Ignore primitive data items which are not attached to a parent group.
+     * 
+     * @param ignoreOrphanPrimitiveElements set to true to ignore primitive data
+     *            items without a parent group item
+     */
+    public void setIgnoreOrphanPrimitiveElements(
+            boolean ignoreOrphanPrimitiveElements) {
+        _ignoreOrphanPrimitiveElements = ignoreOrphanPrimitiveElements;
+    }
+
     /*
      * -------------------------------------------------------------------
      * LegStar annotations related options
@@ -431,6 +456,8 @@ public class Cob2XsdModelClone implements Serializable {
                 + nameConflictPrependParentName() + ", ");
         sb.append("elementNamesStartWithUppercase: "
                 + elementNamesStartWithUppercase() + ", ");
+        sb.append("ignoreOrphanPrimitiveElements: "
+                + ignoreOrphanPrimitiveElements() + ", ");
         sb.append("customXslt: " + getCustomXsltFileName() + ", ");
         sb.append("addLegStarAnnotations: " + addLegStarAnnotations() + ", ");
         sb.append("currencySign: " + getCurrencySign() + ", ");

@@ -84,6 +84,7 @@ public class Cob2XsdWui implements EntryPoint {
     private CheckBox _elementNamesStartWithUppercaseCheckBox;
     private CheckBox _mapConditionsToFacetsCheckBox;
     private CheckBox _nameConflictPrependParentNameCheckBox;
+    private CheckBox _ignoreOrphanPrimitiveElementsCheckBox;
     private CheckBox _addLegStarAnnotationsCheckBox;
 
     private CheckBox _decimalPointIsCommaCheckBox;
@@ -99,33 +100,31 @@ public class Cob2XsdWui implements EntryPoint {
 
     private Cob2XsdServiceAsync _cob2xsdSvc = GWT.create(Cob2XsdService.class);
 
-    private static final String SAMPLE_COBOL_STRUCTURE =
-            "       01 DFHCOMMAREA.\n"
-                    + "           05 QUERY-DATA.\n"
-                    + "              10 CUSTOMER-NAME               PIC X(20).\n"
-                    + "              10 MAX-REPLIES                 PIC S9(4) COMP VALUE -1.\n"
-                    + "                  88 UNLIMITED     VALUE -1.\n"
-                    + "           05 REPLY-DATA.\n"
-                    + "              10 REPLY-COUNT                 PIC 9(8) COMP-3.\n"
-                    + "              10 CUSTOMER OCCURS 1 TO 100 DEPENDING ON REPLY-COUNT.\n"
-                    + "                  15 CUSTOMER-ID             PIC 9(6).\n"
-                    + "                  15 PERSONAL-DATA.\n"
-                    + "                     20 CUSTOMER-NAME        PIC X(20).\n"
-                    + "                     20 CUSTOMER-ADDRESS     PIC X(20).\n"
-                    + "                     20 CUSTOMER-PHONE       PIC X(8).\n"
-                    + "                  15 LAST-TRANS-DATE         PIC X(8).\n"
-                    + "                  15 FILLER REDEFINES LAST-TRANS-DATE.\n"
-                    + "                     20 LAST-TRANS-DAY       PIC X(2).\n"
-                    + "                     20 FILLER               PIC X.\n"
-                    + "                     20 LAST-TRANS-MONTH     PIC X(2).\n"
-                    + "                     20 FILLER               PIC X.\n"
-                    + "                     20 LAST-TRANS-YEAR      PIC X(2).\n"
-                    + "                  15 LAST-TRANS-AMOUNT       PIC $9999.99.\n"
-                    + "                  15 LAST-TRANS-COMMENT      PIC X(9).\n";
+    private static final String SAMPLE_COBOL_STRUCTURE = "       01 DFHCOMMAREA.\n"
+            + "           05 QUERY-DATA.\n"
+            + "              10 CUSTOMER-NAME               PIC X(20).\n"
+            + "              10 MAX-REPLIES                 PIC S9(4) COMP VALUE -1.\n"
+            + "                  88 UNLIMITED     VALUE -1.\n"
+            + "           05 REPLY-DATA.\n"
+            + "              10 REPLY-COUNT                 PIC 9(8) COMP-3.\n"
+            + "              10 CUSTOMER OCCURS 1 TO 100 DEPENDING ON REPLY-COUNT.\n"
+            + "                  15 CUSTOMER-ID             PIC 9(6).\n"
+            + "                  15 PERSONAL-DATA.\n"
+            + "                     20 CUSTOMER-NAME        PIC X(20).\n"
+            + "                     20 CUSTOMER-ADDRESS     PIC X(20).\n"
+            + "                     20 CUSTOMER-PHONE       PIC X(8).\n"
+            + "                  15 LAST-TRANS-DATE         PIC X(8).\n"
+            + "                  15 FILLER REDEFINES LAST-TRANS-DATE.\n"
+            + "                     20 LAST-TRANS-DAY       PIC X(2).\n"
+            + "                     20 FILLER               PIC X.\n"
+            + "                     20 LAST-TRANS-MONTH     PIC X(2).\n"
+            + "                     20 FILLER               PIC X.\n"
+            + "                     20 LAST-TRANS-YEAR      PIC X(2).\n"
+            + "                  15 LAST-TRANS-AMOUNT       PIC $9999.99.\n"
+            + "                  15 LAST-TRANS-COMMENT      PIC X(9).\n";
 
     /**
-     * /**
-     * This is the entry point method.
+     * /** This is the entry point method.
      */
     public void onModuleLoad() {
 
@@ -243,8 +242,8 @@ public class Cob2XsdWui implements EntryPoint {
 
         // Setup button to launch server service
         Button translateButton = new Button("Translate");
-        translateButton.addSelectionListener(
-                new SelectionListener < ButtonEvent >() {
+        translateButton
+                .addSelectionListener(new SelectionListener < ButtonEvent >() {
                     @Override
                     public void componentSelected(ButtonEvent ce) {
                         callServerService();
@@ -269,49 +268,64 @@ public class Cob2XsdWui implements EntryPoint {
         layout.setLabelWidth(DIALOG_LABEL_WIDTH);
         fieldSet.setLayout(layout);
 
-        _fixedRadio = new Radio();
-        _fixedRadio.setBoxLabel("Fixed");
-        _fixedRadio.setValue(true);
-
         _freeRadio = new Radio();
         _freeRadio.setBoxLabel("Free");
-        _freeRadio.addListener(Events.Change, new Listener < FieldEvent >() {
+        _freeRadio.setValue(true);
+
+        _fixedRadio = new Radio();
+        _fixedRadio.setBoxLabel("Fixed");
+        _fixedRadio.setValue(false);
+
+        RadioGroup radioGroup = new RadioGroup();
+        radioGroup.setFieldLabel("Format");
+        radioGroup.add(_freeRadio);
+        radioGroup.add(_fixedRadio);
+        fieldSet.add(radioGroup, _formData);
+
+        _startColumn = new NumberField();
+        _startColumn.setFieldLabel("Start column");
+        fieldSet.add(_startColumn, _formData);
+
+        _endColumn = new NumberField();
+        _endColumn.setFieldLabel("End column");
+        fieldSet.add(_endColumn, _formData);
+
+        // Free format by default
+        freeFormat();
+
+        radioGroup.addListener(Events.Change, new Listener < FieldEvent >() {
 
             @Override
             public void handleEvent(FieldEvent be) {
                 if (_freeRadio.getValue()) {
-                    _cobolRuler1.hide();
-                    _cobolRuler2.hide();
-                    _startColumn.disable();
-                    _endColumn.disable();
+                    freeFormat();
                 } else {
-                    _cobolRuler1.show();
-                    _cobolRuler2.show();
-                    _startColumn.enable();
-                    _endColumn.enable();
+                    fixedFormat();
                 }
 
             }
         });
 
-        RadioGroup radioGroup = new RadioGroup();
-        radioGroup.setFieldLabel("Format");
-        radioGroup.add(_fixedRadio);
-        radioGroup.add(_freeRadio);
-        fieldSet.add(radioGroup, _formData);
-
-        _startColumn = new NumberField();
-        _startColumn.setFieldLabel("Start column");
-        _startColumn.setValue(Cob2XsdModelClone.DEFAULT_START_COLUMN);
-        fieldSet.add(_startColumn, _formData);
-
-        _endColumn = new NumberField();
-        _endColumn.setFieldLabel("End column");
-        _endColumn.setValue(Cob2XsdModelClone.DEFAULT_END_COLUMN);
-        fieldSet.add(_endColumn, _formData);
-
         return fieldSet;
 
+    }
+
+    protected void freeFormat() {
+        _cobolRuler1.hide();
+        _cobolRuler2.hide();
+        _startColumn.setValue(0);
+        _startColumn.disable();
+        _endColumn.disable();
+        _endColumn.setValue(4096);
+    }
+
+    protected void fixedFormat() {
+        _cobolRuler1.show();
+        _cobolRuler2.show();
+        _startColumn.setValue(Cob2XsdModelClone.DEFAULT_START_COLUMN);
+        _startColumn.enable();
+        _endColumn.setValue(Cob2XsdModelClone.DEFAULT_END_COLUMN);
+        _endColumn.enable();
     }
 
     /**
@@ -361,6 +375,14 @@ public class Cob2XsdWui implements EntryPoint {
         nameConflictPrependParentNameGroup
                 .add(_nameConflictPrependParentNameCheckBox);
         fieldSet.add(nameConflictPrependParentNameGroup, _formData);
+
+        _ignoreOrphanPrimitiveElementsCheckBox = new CheckBox();
+        _ignoreOrphanPrimitiveElementsCheckBox.setBoxLabel("Ignore");
+        CheckBoxGroup ignoreOrphanPrimitiveElementsGroup = new CheckBoxGroup();
+        ignoreOrphanPrimitiveElementsGroup.setFieldLabel("Orphan elements");
+        ignoreOrphanPrimitiveElementsGroup
+                .add(_ignoreOrphanPrimitiveElementsCheckBox);
+        fieldSet.add(ignoreOrphanPrimitiveElementsGroup, _formData);
 
         _addLegStarAnnotationsCheckBox = new CheckBox();
         _addLegStarAnnotationsCheckBox.setBoxLabel("Add annotations");
@@ -448,12 +470,11 @@ public class Cob2XsdWui implements EntryPoint {
 
     public Widget createCopyrightPanel() {
         HtmlContainer htmlCopyright = new HtmlContainer(
-                "<p>Copyright &#169; 2009 LegSem. All rights reserved.</p>"
+                "<p>Copyright &#169; 2012 LegSem. All rights reserved.</p>"
                         + "<p>This program is made available under the terms of the"
                         + " <a href=\"http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html\">GNU Lesser Public License v2.1</a>."
                         + "This program is made available in the hope that it will be useful,"
-                        + " but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</p>"
-                );
+                        + " but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</p>");
         htmlCopyright.setBorders(true);
         htmlCopyright.addStyleName("htmlCopyright");
         return htmlCopyright;
@@ -523,14 +544,14 @@ public class Cob2XsdWui implements EntryPoint {
         context.setEndColumn(_endColumn.getValue().intValue());
         context.setTargetNamespace(_xsdNamespace.getValue());
         context.setXsdEncoding(_xsdEncoding.getValue());
-        context
-                .setNameConflictPrependParentName(_nameConflictPrependParentNameCheckBox
-                        .getValue());
+        context.setNameConflictPrependParentName(_nameConflictPrependParentNameCheckBox
+                .getValue());
+        context.setIgnoreOrphanPrimitiveElements(_ignoreOrphanPrimitiveElementsCheckBox
+                .getValue());
         context.setMapConditionsToFacets(_mapConditionsToFacetsCheckBox
                 .getValue());
-        context
-                .setElementNamesStartWithUppercase(_elementNamesStartWithUppercaseCheckBox
-                        .getValue());
+        context.setElementNamesStartWithUppercase(_elementNamesStartWithUppercaseCheckBox
+                .getValue());
         context.setAddLegStarAnnotations(_addLegStarAnnotationsCheckBox
                 .getValue());
         context.setCurrencySign(_cobolCurrencySign.getValue());
