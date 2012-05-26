@@ -74,8 +74,8 @@ public class Cob2XsdWui implements EntryPoint {
     private Label _cobolRuler1;
     private Label _cobolRuler2;
 
-    private Radio _freeRadio;
     private Radio _fixedRadio;
+    private Radio _freeRadio;
     private NumberField _startColumn;
     private NumberField _endColumn;
 
@@ -268,18 +268,18 @@ public class Cob2XsdWui implements EntryPoint {
         layout.setLabelWidth(DIALOG_LABEL_WIDTH);
         fieldSet.setLayout(layout);
 
-        _freeRadio = new Radio();
-        _freeRadio.setBoxLabel("Free");
-        _freeRadio.setValue(true);
-
         _fixedRadio = new Radio();
         _fixedRadio.setBoxLabel("Fixed");
-        _fixedRadio.setValue(false);
+        _fixedRadio.setValue(true);
+
+        _freeRadio = new Radio();
+        _freeRadio.setBoxLabel("Free");
+        _freeRadio.setValue(false);
 
         RadioGroup radioGroup = new RadioGroup();
         radioGroup.setFieldLabel("Format");
-        radioGroup.add(_freeRadio);
         radioGroup.add(_fixedRadio);
+        radioGroup.add(_freeRadio);
         fieldSet.add(radioGroup, _formData);
 
         _startColumn = new NumberField();
@@ -290,8 +290,8 @@ public class Cob2XsdWui implements EntryPoint {
         _endColumn.setFieldLabel("End column");
         fieldSet.add(_endColumn, _formData);
 
-        // Free format by default
-        freeFormat();
+        // Fixed format by default
+        fixedFormat();
 
         radioGroup.addListener(Events.Change, new Listener < FieldEvent >() {
 

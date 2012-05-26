@@ -47,15 +47,7 @@
       </dependency>
 
      <!-- GAE and GWT only needed when populating WEB-INF/lib after a dependency upgrade-->
-     <!-- Google AppEngine
-      <dependency>
-          <groupId>com.google.appengine</groupId>
-          <artifactId>appengine-tools-sdk</artifactId>
-          <version>${appEngineVersion}</version>
-          <type>jar</type>
-          <scope>provided</scope>
-          <optional>false</optional>
-      </dependency>
+     <!-- Google AppEngine -->
       <dependency>
           <groupId>com.google.appengine</groupId>
           <artifactId>appengine-api-1.0-sdk</artifactId>
@@ -79,7 +71,25 @@
           <type>jar</type>
           <scope>provided</scope>
           <optional>false</optional>
-      </dependency>  -->
+      </dependency>
+      <dependency>
+		  <groupId>net.sf.jsr107cache</groupId>
+		  <artifactId>jsr107cache</artifactId>
+		  <version>1.1</version>
+          <scope>provided</scope>
+          <optional>false</optional>
+      </dependency>
+      
+      <!-- Seems useless
+      <dependency>
+          <groupId>com.google.appengine</groupId>
+          <artifactId>appengine-tools-sdk</artifactId>
+          <version>${appEngineVersion}</version>
+          <type>jar</type>
+          <scope>provided</scope>
+          <optional>false</optional>
+      </dependency>
+        -->
       
       
       <!-- Google Web Toolkit
@@ -98,7 +108,13 @@
           <type>jar</type>
           <scope>provided</scope>
           <optional>false</optional>
-      </dependency>
+      </dependency> -->
+      
+      <!--  This one is required by the GAE validation
+            but does not work because GAE looks for
+            an unversioned jar. Need to get the jar 
+            from the GWT sdk and manually copy it to
+            WEB-INF/lib
       <dependency>
           <groupId>com.google.gwt</groupId>
           <artifactId>gwt-servlet</artifactId>
@@ -186,7 +202,7 @@
 
                     <!--
                         Clean the WEB-INF/lib folder from previous dependencies 
-                     -->
+                     
                     <execution> 
                         <id>clean-lib-folder</id> 
                         <phase>validate</phase>
@@ -200,7 +216,7 @@
                                 </delete>
                             </tasks>
                         </configuration>
-                    </execution>
+                    </execution>-->
 
                     <!--
                         Check/Install app engine 
