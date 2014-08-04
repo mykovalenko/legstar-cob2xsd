@@ -1,3 +1,4 @@
 #summary Downloads
+#labels Featured,Phase-Support
 
 [http://search.maven.org/remotecontent?filepath=com/legsem/legstar/legstar-cob2xsd/0.3.6/legstar-cob2xsd-0.3.6.zip legstar-cob2xsd-0.3.6.zip] August 4, 2014
