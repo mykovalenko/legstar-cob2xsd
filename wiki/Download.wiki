@@ -3,9 +3,9 @@
 
 = Current =
 
-[http://repo1.maven.org/maven2/com/legsem/legstar/legstar-cob2xsd/0.3.6/legstar-cob2xsd-0.3.6.zip legstar-cob2xsd-0.3.6.zip] - August 4, 2014
+[http://repo1.maven.org/maven2/com/legsem/legstar/legstar-cob2xsd/0.3.7/legstar-cob2xsd-0.3.7.zip legstar-cob2xsd-0.3.7.zip] - February 4, 2015
 
 = Older =
 
-[http://repo1.maven.org/maven2/com/legsem/legstar/legstar-cob2xsd/0.3.5/legstar-cob2xsd-0.3.5.zip legstar-cob2xsd-0.3.5.zip] - May 26, 2012
+[http://repo1.maven.org/maven2/com/legsem/legstar/legstar-cob2xsd/0.3.6/legstar-cob2xsd-0.3.6.zip legstar-cob2xsd-0.3.6.zip] - August 4, 2014
 
